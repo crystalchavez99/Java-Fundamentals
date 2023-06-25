@@ -44,7 +44,7 @@ public class Stream {
 
         System.out.println("The sum of the numbers list is: " +sum);
 
-        
+
 
     }
 }
