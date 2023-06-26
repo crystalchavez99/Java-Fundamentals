@@ -37,9 +37,22 @@ public class RecordStoreController {
 
     @RequestMapping(value = "/records", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Record> getAllRecords() {
+    public List<Record> getAllRecords(@RequestParam(required = false) String artist, @RequestParam(required = false) String year) {
+        List<Record> returnList = new ArrayList<>();
 
-        return recordList;
+        if (artist != null) {
+            for (Record record : recordList) {
+                if(record.getArtist().contains(artist)) {
+                    returnList.add(record);
+                }
+            }
+        } else {
+            returnList = recordList;
+        }
+
+        // Filtering by year left as an exercise for the learner
+
+        return returnList;
     }
 
     @RequestMapping(value = "/records/{id}", method = RequestMethod.GET)
