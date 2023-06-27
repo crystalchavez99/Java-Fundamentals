@@ -50,7 +50,7 @@ Open the starter project in IntelliJ, find and open the `Dog` class, and tell In
 3. Create the following simple test to demonstrate the effect of `equals` on testing:
 
     ```java
-    public class SampleTest {
+    public class com.company.SampleTest {
 
       @Test
       public void shouldSayDogsAreEqual() {
