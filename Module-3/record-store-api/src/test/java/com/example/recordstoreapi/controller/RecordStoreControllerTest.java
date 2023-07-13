@@ -12,9 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(RecordStoreController.class)
@@ -76,5 +76,52 @@ public class RecordStoreControllerTest {// Wiring in the MockMvc object
                 )
                 .andDo(print())                // Print results to console
                 .andExpect(status().isCreated());        // ASSERT (status code is 201)
+    }
+
+    // Testing GET /records/{id}
+    @Test
+    public void shouldReturnRecordById() throws Exception{
+        Record outputRecord = new Record();
+        outputRecord.setArtist("Billy Joel");
+        outputRecord.setAlbum("The Stranger");
+        outputRecord.setYear("1979");
+        outputRecord.setId(2);
+
+        String outputJson = mapper.writeValueAsString(outputRecord);
+
+        mockMvc.perform(get("/records/2")) //Act
+                .andDo(print())
+                .andExpect(status().isOk()) //Assert
+                .andExpect(content().json(outputJson));
+    }
+
+    // Testing PUT /records/{id}
+    @Test
+    public void shouldUpdateRecordById() throws Exception{
+        // This methods returns nothing so were checking the status code 204 no content
+        Record inputRecord = new Record();
+        inputRecord.setArtist("William Joel");
+        inputRecord.setAlbum("The Stranger");
+        inputRecord.setYear("1977");
+        inputRecord.setId(2);
+
+        String inputJson = mapper.writeValueAsString(inputRecord);
+
+        mockMvc.perform(
+                put("/records/2")
+                        .content(inputJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
+    // Testing DELETE /records/{id}
+    @Test
+    public void shouldDeleteRecordById() throws Exception{
+        // Returns nothing, were testing the status code, 204 no content
+        mockMvc.perform(delete("/records/5"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
     }
 }
