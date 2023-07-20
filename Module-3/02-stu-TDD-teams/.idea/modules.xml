@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/02-stu-TDD-teams.iml" filepath="$PROJECT_DIR$/.idea/02-stu-TDD-teams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/solved/utility-api/utility-api.iml" filepath="$PROJECT_DIR$/solved/utility-api/utility-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starter/utility-api/utility-api (1).iml" filepath="$PROJECT_DIR$/starter/utility-api/utility-api (1).iml" />
+    </modules>
+  </component>
+</project>
