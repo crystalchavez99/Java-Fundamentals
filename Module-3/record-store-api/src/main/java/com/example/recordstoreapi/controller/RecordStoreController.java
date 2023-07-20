@@ -4,6 +4,7 @@ import com.example.recordstoreapi.models.Record;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class RecordStoreController {
 
     @RequestMapping(value = "/records", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Record createRecord(@RequestBody Record record){
+    public Record createRecord(@RequestBody @Valid Record record){
         record.setId(idCounter++);
         recordList.add(record);
         return record;

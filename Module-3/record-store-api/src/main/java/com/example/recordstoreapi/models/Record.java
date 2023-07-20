@@ -1,9 +1,17 @@
 package com.example.recordstoreapi.models;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class Record {private String artist;
+public class Record {
+
+    @NotEmpty(message = "You must supply a value for artist.")
+    private String artist;
+    @NotEmpty(message = "You must supply a value for album.")
     private String album;
+    @NotEmpty(message = "You must supply a value for year.")
+    @Size(min = 4, max = 4, message = "Year must be 4 digits")
     private String year;
     private int id;
 
