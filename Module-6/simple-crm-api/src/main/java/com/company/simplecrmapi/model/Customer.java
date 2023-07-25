@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -18,6 +19,10 @@ public class Customer {
 
     private String company;
     private String phone;
+
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Note> notes;
+
 
     public Integer getId() {
         return id;
@@ -59,6 +64,14 @@ public class Customer {
         this.phone = phone;
     }
 
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,11 +81,12 @@ public class Customer {
                 Objects.equals(getFirstName(), customer.getFirstName()) &&
                 Objects.equals(getLastName(), customer.getLastName()) &&
                 Objects.equals(getCompany(), customer.getCompany()) &&
-                Objects.equals(getPhone(), customer.getPhone());
+                Objects.equals(getPhone(), customer.getPhone()) &&
+                Objects.equals(getNotes(), customer.getNotes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getCompany(), getPhone());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getCompany(), getPhone(), getNotes());
     }
 }
