@@ -1,8 +1,10 @@
 package com.company.secureapp.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -25,8 +27,9 @@ public class SecureAppController {
     }
 
     @RequestMapping(value = "/needsRole", method = RequestMethod.POST)
-    public String authRolePost(Principal principal) {
-        return "Looks like you have the ADMIN role.";
+    public String authRolePost(Principal principal)
+    {
+        return "Hello " + principal.getName() + "! Looks like you have the ADMIN role";
     }
 
     @RequestMapping(value = "/allDone", method = RequestMethod.GET)
@@ -34,3 +37,4 @@ public class SecureAppController {
         return "That's All Folks!";
     }
 }
+
